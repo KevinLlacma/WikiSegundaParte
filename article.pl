@@ -16,14 +16,12 @@ $sth->execute($owner, $title);
 print $q->header("text/XML");
 
 while (my @arreglo = $sth->fetchrow_array){
-  print <<BLOCK;
-  <?xml version='1.0' encoding='utf-8'?>
-   <article>
-    <owner>$owner</owner>
-    <title>$arreglo[0]</title>
-    <text>$arreglo[1]</text>
-   </article>
-  BLOCK
-} 
-  $sth->finish;
-  $dbh->disconnect;
+  print "<?xml version='1.0' encoding='utf-8'?>\n";
+  print "<article>\n";
+  print "<owner>$owner</owner>\n ";
+  print "<title>$arreglo[1]</title>\n";
+  print "<text>$arreglo[2]</text>\n";
+  print "</article>\n";
+}  
+ $sth->finish;
+ $dbh->disconnect;
