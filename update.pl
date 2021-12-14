@@ -14,4 +14,5 @@ my $title = $q->param("title");
 my $text = $q->param("text");
 my $dsn = "DBI:MariaDB:database=pweb1;host=192.168.1.69";
 my $dbh = DBI->connect($dsn, $user, $password) or die ("No se ha podido establecer conexion");
-
+my $sth = $dbh->prepare("UPDATE Articles SET text = ? WHERE owner = ? AND title = ?");
+$sth->execute($text, $owner, $title);
