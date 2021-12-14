@@ -17,6 +17,20 @@ my $dbh = DBI->connect($dsn, $user, $password) or die ("No se pudo ha podido est
 my $sth = $dbh->prepare("SELECT text FROM Articles WHERE owner = ? and title = ?");
 $sth->execute($owner, $title);
 
+sub array {
+my @datos;
+my $lineas=$_[0]; 
+my $var=0;
+$linea =~ s/\n/\|/g;
+while($lineas =~ /^([^|]+)\|(.+)/){
+    $lineas = $2;
+    $datos[$var] = $1;
+    $var++;
+}
+$datos[$var] = $lineas;
+$var++;
+return @datos;
+}
 
 
 
