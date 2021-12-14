@@ -11,5 +11,5 @@ my $owner = $q->param("owner");
 my $title = $q->param("title");
 my $dsn = "DBI:MariaDB:database=pweb1;host=192.168.1.69";
 my $dbh = DBI->connect($dsn, $user, $password) or die ("No se ha podido establecer conexion");
-
-
+my $sth = $dbh->prepare("SELECT owner, title, text FROM Articles WHERE owner = ? and title = ?");
+$sth->execute($owner, $title);
